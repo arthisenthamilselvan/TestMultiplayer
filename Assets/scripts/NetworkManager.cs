@@ -87,9 +87,11 @@ public class NetworkManager : MonoBehaviour
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
         if (stream.isWriting) {
               stream.SendNext(Target1);
+            stream.SendNext(Target2);
         }
         else if (stream.isReading) {
             Target1=(GameObject)stream.ReceiveNext();
+            Target2 = (GameObject)stream.ReceiveNext();
         }
     }
 
