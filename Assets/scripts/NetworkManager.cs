@@ -68,8 +68,8 @@ public class NetworkManager : MonoBehaviour
     IEnumerator SpawnPlayer1() {
         yield return new WaitForSeconds(1f);
         myplayer1 = PhotonNetwork.Instantiate("Tank", Spawnpoint1.position, Spawnpoint1.rotation, 0) as GameObject;
-        myplayer1.transform.parent = Target1.transform;
-        myplayer1.transform.SetParent(Target1.transform, false);
+        // myplayer1.transform.parent = Target1.transform;
+        myplayer1.transform.SetParent(Target1.transform, true);
 
         //myplayer1 = TankIns;
         //TankIns.transform.position = Spawnpoint1.position;
@@ -79,8 +79,8 @@ public class NetworkManager : MonoBehaviour
     IEnumerator SpawnPlayer2() {
         yield return new WaitForSeconds(1f);
         myplayer1 = PhotonNetwork.Instantiate("Tank", Spawnpoint2.position, Spawnpoint2.rotation, 0) as GameObject;
-        myplayer1.transform.parent = Target1.transform;
-        myplayer1.transform.SetParent(Target1.transform,false);
+        // myplayer1.transform.parent = Target1.transform;
+        myplayer1.transform.SetParent(Target1.transform, true);
 
         //myplayer2 = TankIns;
         //TankIns.transform.position = Spawnpoint2.position;
