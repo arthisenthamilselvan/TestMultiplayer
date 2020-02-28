@@ -16,57 +16,63 @@ public class Movement : MonoBehaviour, IPunObservable
 
     void Update()
     {
-        if (PhotonNetwork.isMasterClient) 
-        {
-            if (view.ownerId == 0) 
-            {
-                var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
-                var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
-                transform.Rotate(0, x, 0);
-                transform.Translate(0, 0, z);
+        var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
+        var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
+        transform.Rotate(0, x, 0);
+        transform.Translate(0, 0, z);
 
-                pos = transform.position;
-                rot = transform.rotation;
-            }
+        //if (PhotonNetwork.isMasterClient) {
+        //    if (view.ownerId == 0) {
+        //if (PhotonNetwork.isMasterClient) 
+        //{
+        //    if (view.ownerId == 0) 
+        //    {
+        //        var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
+        //        var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
+        //        transform.Rotate(0, x, 0);
+        //        transform.Translate(0, 0, z);
+        //    }
 
-            if (view.ownerId == 1)
-            {
-                transform.position = pos;
-                transform.rotation = rot;
-            }
-        }
-        else
-        {
-            if (view.ownerId == 1)
-            {
-                var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
-                var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
-                transform.Rotate(0, x, 0);
-                transform.Translate(0, 0, z);
+        //        pos = transform.position;
+        //        rot = transform.rotation;
+        //    }
 
-                pos = transform.position;
-                rot = transform.rotation;
-            }
+        //        if (view.ownerId == 1) {
+        //            transform.position = pos;
+        //            transform.rotation = rot;
+        //        }
+        //    }
+        //    else if (!PhotonNetwork.isMasterClient) {
+        //        if (view.ownerId == 1) {
+        //            var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
+        //            var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
+        //            transform.Rotate(0, x, 0);
+        //            transform.Translate(0, 0, z);
 
-            if (view.ownerId == 0)
-            {
-                transform.position = pos;
-                transform.rotation = rot;
-            }
-        }
-    }
+        //            pos = transform.position;
+        //            rot = transform.rotation;
+        //        }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.isWriting)
-        {
+        //        if (view.ownerId == 0) {
+        //            transform.position = pos;
+        //            transform.rotation = rot;
+        //        }
+        //    }
+        //}
+    
+}
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+        if (stream.isWriting) {
             stream.SendNext(pos);
             stream.SendNext(rot);
         }
-        else if (stream.isReading)
-        {
+        else if (stream.isReading) {
             pos = (Vector3)stream.ReceiveNext();
             rot = (Quaternion)stream.ReceiveNext();
         }
+
     }
+
+
 }
