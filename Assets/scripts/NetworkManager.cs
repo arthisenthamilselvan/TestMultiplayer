@@ -44,28 +44,30 @@ public class NetworkManager : MonoBehaviour
     void OnJoinedRoom() {
         // TankIns = PhotonNetwork.Instantiate("Tank", transform.position, transform.rotation, 0) as GameObject;
 
-        //if (TankIns.GetComponent<PhotonView>().isMine) {
-        //    print("1------->");
-        //    StartCoroutine(SpawnPlayer1());
-        //}
-        //else{
-        //    print("2------->");
-        //    StartCoroutine(SpawnPlayer2());
-        //}
-        if (PhotonNetwork.isMasterClient) {
-            //if (PhotonNetwork.playerList.Length > 1) {
-                StartCoroutine(SpawnPlayer1());
-            //}
+        // if (TankIns.GetComponent<PhotonView>().isMine) {
+        if (PhotonNetwork.playerList.Length > 1) {
+            print("1------->");
+            StartCoroutine(SpawnPlayer1());
         }
         else {
+            print("2------->");
             StartCoroutine(SpawnPlayer2());
         }
+
+        //if (PhotonNetwork.isMasterClient) {
+        //    //if (PhotonNetwork.playerList.Length > 1) {
+        //        StartCoroutine(SpawnPlayer1());
+        //    //}
+        //}
+        //else {
+        //    StartCoroutine(SpawnPlayer2());
+        //}
     }
 
 
     IEnumerator SpawnPlayer1() {
         yield return new WaitForSeconds(1f);
-        //myplayer1 = PhotonNetwork.Instantiate("Tank", Spawnpoint1.position, Spawnpoint1.rotation, 0) as GameObject;
+        myplayer1 = PhotonNetwork.Instantiate("Tank", Spawnpoint1.position, Spawnpoint1.rotation, 0) as GameObject;
         myplayer1.transform.parent = Target1.transform;
 
         //myplayer1 = TankIns;
@@ -75,8 +77,8 @@ public class NetworkManager : MonoBehaviour
     }
     IEnumerator SpawnPlayer2() {
         yield return new WaitForSeconds(1f);
-        //GameObject myplayer1 = PhotonNetwork.Instantiate("Tank", Spawnpoint2.position, Spawnpoint2.rotation, 0) as GameObject;
-        myplayer2.transform.parent = Target2.transform;
+        myplayer1 = PhotonNetwork.Instantiate("Tank", Spawnpoint2.position, Spawnpoint2.rotation, 0) as GameObject;
+        myplayer1.transform.parent = Target2.transform;
 
         //myplayer2 = TankIns;
         //TankIns.transform.position = Spawnpoint2.position;
