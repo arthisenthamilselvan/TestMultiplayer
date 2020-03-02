@@ -7,7 +7,6 @@ public class TankShooter : MonoBehaviour {
     public GameObject Bullet;
     public int force = 30;
 
-    // Start is called before the first frame update
     void Start() {
         view = GetComponent<PhotonView>();
     }

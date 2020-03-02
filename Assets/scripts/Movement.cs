@@ -71,7 +71,6 @@ public class Movement : MonoBehaviour, IPunObservable
             pos = (Vector3)stream.ReceiveNext();
             rot = (Quaternion)stream.ReceiveNext();
         }
-
     }
 
 
