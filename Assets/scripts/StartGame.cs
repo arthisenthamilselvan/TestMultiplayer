@@ -19,8 +19,6 @@ public class StartGame : MonoBehaviour
         networkmanager.SetActive(true);
     }
 
-   
-
     public void OnEnableTank() {
         startGameFunc();
     }
